@@ -1,7 +1,8 @@
-User can enter a location (city, state)
-App displays forecast for that location over the next 5 days
-User can reset all data and start over
-You can write this as a web app or send a recording of a quick demo of the app being used.
+TODO:
+* transfer the month/day/year date into a day of the week date
+* format the data as a forecast(create function)
+* create a method to reset the forecast
 
-Input city and state into Bing Maps Locations API to get the geocoding coords
-Input coords into National Weather Service API and output the forecasts over next 5 days
+DONE:
+* created process to get geocode from an input city and state
+* got weather data for 5 days by inputting the geocode into weather api
