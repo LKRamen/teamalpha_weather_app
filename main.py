@@ -34,6 +34,10 @@ def initial_user_prompt() -> dict:
         main()
 
 def prompt_user(input_text: str) -> bool:
+    """ Prompts the user to ask if they want to continue, so they don't get overloaded with all the info being dumped.
+    :param input_text: The name of the information the user may want to see.
+    :return:
+    """
     reset_input = input("Would you like to " + input_text + "? Enter 'y' for Yes, 'n' for No\n")
     if reset_input == 'y':
         return True
@@ -66,6 +70,11 @@ class forecast():
 
 
     def return_day_of_week(self, weather_json: dict, day_num: int) -> str:
+        """ Returns the name of the day of the week.
+        :param weather_json: API's json file with weather data
+        :param day_num: The day of the week, in relation to the five days being tracked
+        :return:
+        """
         forecast_year = [weather_dict['date'][0:4] for weather_dict in weather_json['forecast']['forecastday']]
         forecast_month = [weather_dict['date'][5:7] for weather_dict in weather_json['forecast']['forecastday']]
         forecast_day = [weather_dict['date'][8:10] for weather_dict in weather_json['forecast']['forecastday']]
@@ -75,6 +84,9 @@ class forecast():
 
 class todays_forecast(forecast):
     def __init__(self, weather_json: dict) -> None:
+        """Takes the data from the weather API's json file, formats, and prints the forecast for the day.
+        :param weather_json: API json file with weather data
+        """
         self.weather_json = weather_json
         print("Today's Forecast:")
         current_temp = str(weather_json['current']['temp_f'])
