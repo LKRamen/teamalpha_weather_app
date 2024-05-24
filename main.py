@@ -7,10 +7,15 @@ import sys
 
 def main():
     weather_json = prompt_user()
-    format_forecast(weather_json)
+    day_forecast(weather_json)
     reset()
 
 def prompt_user() -> dict:
+    """Prompts the user to input a city and state. Then using a geocoding api, finds the longitude and latitude of that city.
+    Finally it inputs that position into a forecast API which outputs all the forecast info necessary. If an invalid city is
+    input, it will reprompt the user.
+    :return:
+    """
     city_name = input("Please enter a city:\n")
     state_name = input("Please enter this city's state:\n")
     try:
@@ -23,14 +28,27 @@ def prompt_user() -> dict:
         print("Sorry the city or state named was invalid. Please try again.\n")
         main()
 
-def format_forecast(weather_json: dict) -> str:
-    forecast_year = [weather_dict['date'][0:4] for weather_dict in weather_json['forecast']['forecastday']]
-    forecast_month = [weather_dict['date'][5:7] for weather_dict in weather_json['forecast']['forecastday']]
-    forecast_day = [weather_dict['date'][8:10] for weather_dict in weather_json['forecast']['forecastday']]
-    date_datetime = datetime.date(int(forecast_year[0]), int(forecast_month[0]), int(forecast_day[0]))
-    day = date_datetime.strftime('%a')
-    print(day)
-    forecast_avgtemps = [str(weather_dict['day']['avgtemp_f']) for weather_dict in weather_json['forecast']['forecastday']]
+class forecast():
+    def __init__(self, weather_json: dict) -> str:
+        self.weather_json = weather_json
+        day_of_week = self.return_day_of_week(weather_json, 0)
+        print(day_of_week)
+        forecast_avgtemps = [str(weather_dict['day']['avgtemp_f']) for weather_dict in
+                             weather_json['forecast']['forecastday']]
+
+    def return_day_of_week(self, weather_json: dict, day_num: int) -> str:
+        forecast_year = [weather_dict['date'][0:4] for weather_dict in weather_json['forecast']['forecastday']]
+        forecast_month = [weather_dict['date'][5:7] for weather_dict in weather_json['forecast']['forecastday']]
+        forecast_day = [weather_dict['date'][8:10] for weather_dict in weather_json['forecast']['forecastday']]
+        date_datetime = datetime.date(int(forecast_year[day_num]), int(forecast_month[day_num]), int(forecast_day[day_num]))
+        day = date_datetime.strftime('%a')
+        return day
+
+class day_forecast(forecast):
+    def __init__(self, weather_json: dict):
+        self.weather_json = weather_json
+        day_of_week = self.return_day_of_week(weather_json, 0)
+        print(day_of_week)
 
 def reset() -> None:
     reset_input = input("Would you like to search a different forecast? Enter 'y' for Yes, 'n' for No\n")

@@ -1,7 +1,7 @@
 TODO:
-* transfer the month/day/year date into a day of the week date
 * format the data as a forecast(create function)
-* create a method to reset the forecast
+    - create a forecast class
+    - create a child class 'current' and 'five_day_forecast'
 
 DONE:
 * created process to get geocode from an input city and state
