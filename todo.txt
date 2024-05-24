@@ -1,13 +1,8 @@
 TODO:
 * format the data as a forecast(create function)
-- Day Forecast:
-* avg temp f, max temp f, min temp f
-* max wind speed
-* chance of rain, will it snow, condition
-* !!IN ASTRO!! sunrise and sunset
 
 - Five Day Forecast:
-* * avg temp f, max temp f, min temp f
+* avg temp f, max temp f, min temp f
 * chance of rain, will it snow, condition
 
 * create function to suggest an outfit
@@ -17,3 +12,8 @@ DONE:
 * got weather data for 5 days by inputting the geocode into weather api
 * create a forecast class
 * create a child class 'current' and 'five_day_forecast'
+- Day Forecast:
+* avg temp f, max temp f, min temp f
+* max wind speed
+* chance of rain, will it snow, condition
+* !!IN ASTRO!! sunrise and sunset
