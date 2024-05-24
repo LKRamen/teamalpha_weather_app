@@ -1,5 +1,9 @@
 """
-Create a weather app
+main.py
+
+Usage: main.py
+
+Creates a weather forecast where a user can input a city and state and it returns the weather forecast.
 """
 import requests
 import datetime
