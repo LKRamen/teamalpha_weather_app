@@ -7,7 +7,8 @@ import sys
 
 def main():
     weather_json = prompt_user()
-    day_forecast(weather_json)
+    todays_forecast(weather_json)
+    forecast(weather_json)
     reset()
 
 def prompt_user() -> dict:
@@ -32,7 +33,7 @@ class forecast():
     def __init__(self, weather_json: dict) -> str:
         self.weather_json = weather_json
         day_of_week = self.return_day_of_week(weather_json, 0)
-        print(day_of_week)
+
         forecast_avgtemps = [str(weather_dict['day']['avgtemp_f']) for weather_dict in
                              weather_json['forecast']['forecastday']]
 
@@ -41,14 +42,32 @@ class forecast():
         forecast_month = [weather_dict['date'][5:7] for weather_dict in weather_json['forecast']['forecastday']]
         forecast_day = [weather_dict['date'][8:10] for weather_dict in weather_json['forecast']['forecastday']]
         date_datetime = datetime.date(int(forecast_year[day_num]), int(forecast_month[day_num]), int(forecast_day[day_num]))
-        day = date_datetime.strftime('%a')
+        day = date_datetime.strftime('%A')
         return day
 
-class day_forecast(forecast):
+class todays_forecast(forecast):
     def __init__(self, weather_json: dict):
         self.weather_json = weather_json
-        day_of_week = self.return_day_of_week(weather_json, 0)
-        print(day_of_week)
+        print("Today's Forecast:")
+        avg_temp = str(weather_json['forecast']['forecastday'][0]['day']['avgtemp_f'])
+        max_temp = str(weather_json['forecast']['forecastday'][0]['day']['maxtemp_f'])
+        min_temp = str(weather_json['forecast']['forecastday'][0]['day']['mintemp_f'])
+        max_wind_speed = str(weather_json['forecast']['forecastday'][0]['day']['maxwind_mph'])
+        chance_of_rain = str(weather_json['forecast']['forecastday'][0]['day']['daily_chance_of_rain'])
+        chance_of_snow = str(weather_json['forecast']['forecastday'][0]['day']['daily_chance_of_snow'])
+        condition = str(weather_json['forecast']['forecastday'][0]['day']['condition']['text'])
+        sunrise_time = str(weather_json['forecast']['forecastday'][0]['astro']['sunrise'])
+        sunset_time = str(weather_json['forecast']['forecastday'][0]['astro']['sunset'])
+
+        print(f"""
+        Temperature: {avg_temp}°F(Lows of {min_temp}°F and Highs of {max_temp}°F)
+        Conditions: {condition}
+        Chance of Rain: {chance_of_rain}%
+        Chance of Snow: {chance_of_snow}%
+        Max Wind Speed: {max_wind_speed} mph
+        Sunrise: {sunrise_time}
+        Sunset: {sunset_time}
+        """)
 
 def reset() -> None:
     reset_input = input("Would you like to search a different forecast? Enter 'y' for Yes, 'n' for No\n")
