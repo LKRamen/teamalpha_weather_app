@@ -1,5 +1,5 @@
 TODO:
-* create function to suggest an outfit
+* Make the python functionality work in an app that utilizes html, css, and js
 
 DONE:
 * created process to get geocode from an input city and state
