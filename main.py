@@ -83,7 +83,7 @@ class forecast():
         forecast_month = [weather_dict['date'][5:7] for weather_dict in weather_json['forecast']['forecastday']]
         forecast_day = [weather_dict['date'][8:10] for weather_dict in weather_json['forecast']['forecastday']]
         date_datetime = datetime.date(int(forecast_year[day_num]), int(forecast_month[day_num]), int(forecast_day[day_num]))
-        day = date_datetime.strftime('%A')
+        day = date_datetime.strftime('%a')
         return day
 
 class todays_forecast(forecast):
